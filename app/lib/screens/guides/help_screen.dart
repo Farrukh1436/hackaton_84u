@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../data/help_data.dart';
 import '../../language/language_controller.dart';
+import '../../widgets/ai_health_assistant_panel.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -31,7 +32,7 @@ class HelpScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          LanguageController.get('help_tutorial') ?? 'Help & Guides',
+                          'AI',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -89,7 +90,7 @@ class HelpScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                LanguageController.get('help_quick_access') ?? 'Emergency Services Guide',
+                                'AI Health Assistant',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -111,6 +112,64 @@ class HelpScreen extends StatelessWidget {
                       ],
                     ),
                   ],
+                ),
+              ),
+            ),
+          ),
+
+          // Device status section at top of Guides
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 16, 20, 8),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.green.withOpacity(0.1),
+                  child: Icon(Icons.watch, color: Colors.green),
+                ),
+                title: Text('Device connected'),
+                subtitle: Text('Everything is good — AI is monitoring your health'),
+              ),
+            ),
+          ),
+
+          // AI Health Assistant button below the device section
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 4, 20, 12),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 700),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    backgroundColor: Colors.red[600],
+                    foregroundColor: Colors.white,
+                    elevation: 2,
+                  ),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (ctx) => AIHealthAssistantPanel(
+                        onClose: () => Navigator.of(ctx).pop(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.health_and_safety),
+                  label: Text('AI Health Assistant'),
                 ),
               ),
             ),

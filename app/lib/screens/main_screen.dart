@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     NavigationItem(
       icon: Icons.menu_book_outlined,
       selectedIcon: Icons.menu_book,
-      label: 'navbar_guides',
+      label: 'AI',
       color: Colors.blue[600]!,
     ),
     NavigationItem(
